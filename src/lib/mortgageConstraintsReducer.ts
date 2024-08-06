@@ -39,6 +39,9 @@ export default function mortgageConstraintsReducer(mortgage:initialMortgageConst
             return newState
         }
         case "calculateRepayments":{
+            if(mortgage.mortgageAmount==0 || mortgage.mortgageInterestRate>100 || mortgage.mortgageTerm==0){
+                return mortgage
+            }
             const monthlyRate = mortgage.mortgageInterestRate / 100 / 12;
             const numPayments = mortgage.mortgageTerm * 12;
             
