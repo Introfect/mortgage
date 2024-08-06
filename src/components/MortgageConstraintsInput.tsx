@@ -4,10 +4,9 @@ import { initialMortgageConstraintsType } from './MortgageCalculator';
 type Props = {
     dispatch:Dispatch<{ type: string; value: number }>,
     mortgageConstraints:initialMortgageConstraintsType,
-    calculateRepayments:()=>void
 }
 
-function MortgageConstraintsInput({dispatch,mortgageConstraints,calculateRepayments}: Props) {
+function MortgageConstraintsInput({dispatch,mortgageConstraints}: Props) {
 
  const handleDispatch=(type: string, value: number)=>{
   dispatch({
@@ -16,16 +15,20 @@ function MortgageConstraintsInput({dispatch,mortgageConstraints,calculateRepayme
   })
 
  }
+ 
 
  const handleClear=(type: string, value: number)=>{
   dispatch({
     type,
     value
   })
-  calculateRepayments()
-
  }
-
+const handleCalculate=(type: string, value: number)=>{
+  dispatch({
+    type,
+    value
+  })
+}
   return (
     <div className="p-8 w-96">
     <div className='flex justify-between items-center mb-2'>
@@ -96,7 +99,8 @@ function MortgageConstraintsInput({dispatch,mortgageConstraints,calculateRepayme
       </div>
     </div>
     <button
-            onClick={calculateRepayments}
+    type='button'
+            onClick={()=>handleCalculate("calculateRepayments",0)}
             className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded mt-2"
           >
             Calculate Repayments
